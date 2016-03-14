@@ -1,17 +1,8 @@
-{% set zookeeper_map = salt['grains.filter_by']({
-    'Debian': {
-      'service_script': '/etc/init.d/zookeeper',
-      'service_script_source': 'zookeeper.init.d.ubuntu',
-      'service_script_mode': '755',
+{% set zk_map = salt['grains.filter_by']({
+    'default': {
+      'service_conf': '/etc/init.d/zookeeper',
+      'service_script': 'zookeeper.init-ubuntu',
     },
-    'RedHat': {
-      'service_script': '/etc/init.d/zookeeper',
-      'service_script_source': 'zookeeper.init.d',
-      'service_script_mode': '755',
+    'Ubuntu': {
     },
-    'Suse': {
-      'service_script': '/etc/init.d/zookeeper',
-      'service_script_source': 'zookeeper.init.d.ubuntu',
-      'service_script_mode': '755',
-    },
-}, merge=salt['pillar.get']('zookeeper:lookup')) %}
+}, merge=salt['pillar.get']('zookeeper:lookup'), default='default') %}

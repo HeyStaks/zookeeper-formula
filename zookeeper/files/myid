@@ -1,0 +1,6 @@
+{%- from 'zookeeper/settings.sls' import zk with context %}
+{%- set rand_id = range(1, 256)|random %}
+{%- set id_str = '%s\n'|format(rand_id) %}
+{%- if id_str not in zk.zookeeper_myids.values() -%}
+{{ rand_id }}
+{%- endif %}
