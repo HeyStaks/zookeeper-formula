@@ -12,7 +12,7 @@ Formula to set up and configure a single-node zookeeper server.
 Formula Dependencies
 ====================
 
-* sun-java
+* Heystaks/java-formula
 
 Available states
 ================
