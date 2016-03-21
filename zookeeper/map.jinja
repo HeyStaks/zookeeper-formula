@@ -1,8 +1,31 @@
-{% set zk_map = salt['grains.filter_by']({
-    'default': {
-      'service_conf': '/etc/init.d/zookeeper',
-      'service_script': 'zookeeper.init-ubuntu',
-    },
-    'Ubuntu': {
-    },
-}, merge=salt['pillar.get']('zookeeper:lookup'), default='default') %}
+{% import_yaml 'zookeeper/defaults.yaml' as default_settings %}
+
+{% set os_family_map = salt['grains.filter_by']({
+        'Debian': {},
+        'RedHat': {},
+  }, merge=salt['pillar.get']('zookeeper:lookup')) %}
+
+{% do default_settings.zookeeper.update(os_family_map) %}
+{% set zookeeper = salt['pillar.get']( 'zookeeper', default_settings.zookeeper, merge=True) %}
+
+{% set version_name = 'zookeeper-' + zookeeper.version %}
+{% set source_url = zookeeper.default_url + version_name + '.tar.gz' %}
+{% set home = zookeeper.prefix + version_name %}
+{% set bin_dir = home + '/bin' %}
+{% set conf_dir = home + '/conf' %}
+
+### Mine gathering
+{% set hostnames = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain') %}
+{% set ips = salt['mine.get']('roles:zookeeper', 'network.ip_addrs', 'grain') %}
+{% set myids = salt['mine.get']('roles:zookeeper', 'zookeeper_myid', 'grain') %}
+### End Mine
+
+{% do zookeeper.update({  'version_name': version_name,
+                           'source_url': source_url,
+                           'home': home,
+                           'bin_dir': bin_dir,
+                           'conf_dir': conf_dir,
+                           'hostnames': hostnames,
+                           'ips': ips,
+                           'myids': myids,
+                        }) %}

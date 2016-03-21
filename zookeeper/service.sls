@@ -1,13 +1,12 @@
-{% from 'zookeeper/settings.sls' import zk with context %}
-{% from 'zookeeper/map.jinja' import zk_map with context %}
+{% from 'zookeeper/map.jinja' import zookeeper with context %}
 
 include:
   - .config
 
 zookeeper_init:
   file.managed:
-    - name: {{ zk_map.service_conf }}
-    - source: salt://zookeeper/files/{{ zk_map.service_script }}
+    - name: {{ zookeeper.service_conf }}
+    - source: salt://zookeeper/templates/{{ zookeeper.service_script }}
     - user: root
     - group: root
     - mode: 755

@@ -1,4 +1,4 @@
-{% from 'zookeeper/settings.sls' import zk with context -%}
+{% from 'zookeeper/map.jinja' import zookeeper with context -%}
 {% from 'java/settings.sls' import java with context -%}
 #! /bin/bash
 ### BEGIN INIT INFO
@@ -24,9 +24,9 @@ DESC="centralized coordination service"
 SCRIPTNAME=/etc/init.d/$NAME
 
 # Modify zookeeper default values
-ZOOBINDIR="{{ zk.bin_dir }}"
-ZK_USER="{{ zk.user }}"
-ZK_GROUP="{{ zk.group }}"
+ZOOBINDIR="{{ zookeeper.bin_dir }}"
+ZK_USER="{{ zookeeper.user }}"
+ZK_GROUP="{{ zookeeper.group }}"
 ZOOMAIN="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=true org.apache.zookeeper.server.quorum.QuorumPeerMain"
 
 # Load java env
