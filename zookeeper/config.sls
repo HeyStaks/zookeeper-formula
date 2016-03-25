@@ -1,14 +1,21 @@
-{% from 'zookeeper/map.jinja' import zookeeper with context %}
+{%- from 'zookeeper/map.jinja' import zookeeper with context %}
+
+zookeeper_datadir:
+  file.directory:
+    - name: {{ zookeeper.config.data_dir }}
+    - user: {{ zookeeper.user }}
+    - group: {{ zookeeper.group }}
+    - makedirs: True
 
 zookeeper_myid:
   file.managed:
     - name: {{ zookeeper.config.data_dir }}/myid
     - source: salt://zookeeper/templates/myid
-    - replace: False
     - user: {{ zookeeper.user }}
     - group: {{ zookeeper.group }}
-    - mode: 644
     - template: jinja
+    - require:
+      - file: zookeeper_datadir
 
 zookeeper_main_config:
   file.managed:
@@ -16,16 +23,6 @@ zookeeper_main_config:
     - source: salt://zookeeper/templates/zoo.cfg
     - user: {{ zookeeper.user }}
     - group: {{ zookeeper.group }}
-    - mode: 644
     - template: jinja
     - watch:
       - file: zookeeper_myid
-
-zookeeper_env:
-  file.managed:
-    - name: {{ zookeeper.conf_dir }}/zookeeper-env.sh
-    - source: salt://zookeeper/templates/zookeeper-env.sh
-    - user: {{ zookeeper.user }}
-    - group: {{ zookeeper.group }}
-    - mode: 644
-    - template: jinja

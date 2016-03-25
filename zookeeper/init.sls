@@ -1,9 +1,5 @@
 {%- from 'zookeeper/map.jinja' import zookeeper with context %}
 
-include:
-  - .config
-  - .service
-
 zookeeper_group:
   group.present:
     - name: {{ zookeeper.group }}
@@ -33,13 +29,6 @@ zookeeper_prefix:
     - name: {{ zookeeper.prefix }}
     - user: root
     - group: root
-
-zookeeper_datadir:
-  file.directory:
-    - name: {{ zookeeper.config.data_dir }}
-    - user: {{ zookeeper.user }}
-    - group: {{ zookeeper.group }}
-    - makedirs: True
 
 zookeeper_archive:
   archive.extracted:

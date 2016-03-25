@@ -7,7 +7,6 @@ zookeeper:
   prefix: /opt
   service_conf: /etc/init.d/zookeeper
   service_script: "zookeeper.init-ubuntu"
-  ids: [1, 6, 8]
   config:
     log_dir: /var/log/zookeeper
     log_level: INFO

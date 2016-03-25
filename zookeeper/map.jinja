@@ -10,7 +10,7 @@
 
 {% set version_name = 'zookeeper-' + zookeeper.version %}
 {% set source_url = zookeeper.default_url + version_name + '.tar.gz' %}
-{% set home = zookeeper.prefix + version_name %}
+{% set home = zookeeper.prefix + "/" + version_name %}
 {% set bin_dir = home + '/bin' %}
 {% set conf_dir = home + '/conf' %}
 

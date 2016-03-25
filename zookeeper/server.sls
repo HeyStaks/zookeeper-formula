@@ -1,7 +1,16 @@
-{% from 'zookeeper/map.jinja' import zookeeper with context %}
+{%- from 'zookeeper/map.jinja' import zookeeper with context %}
 
 include:
-  - .config
+  - zookeeper
+  - zookeeper.config
+
+zookeeper_env:
+  file.managed:
+    - name: {{ zookeeper.conf_dir }}/zookeeper-env.sh
+    - source: salt://zookeeper/templates/zookeeper-env.sh
+    - user: {{ zookeeper.user }}
+    - group: {{ zookeeper.group }}
+    - template: jinja
 
 zookeeper_init:
   file.managed:

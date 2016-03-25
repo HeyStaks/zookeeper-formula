@@ -1,5 +1,4 @@
 {% from 'zookeeper/map.jinja' import zookeeper with context -%}
-{% from 'java/settings.sls' import java with context -%}
 #! /bin/bash
 ### BEGIN INIT INFO
 # Provides:          zookeeper
