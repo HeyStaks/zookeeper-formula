@@ -17,7 +17,7 @@ zookeeper_myid:
     - require:
       - file: zookeeper_datadir
 
-zookeeper_main_config:
+zookeeper_config:
   file.managed:
     - name: {{ zookeeper.home }}/conf/zoo.cfg
     - source: salt://zookeeper/templates/zoo.cfg
