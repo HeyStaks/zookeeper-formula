@@ -1,8 +1,8 @@
 zookeeper:
   user: zookeeper
   group: zookeeper
-  uid: 6030
-  version: 3.4.8
+  uid: '6030'
+  version: '3.4.8'
   default_url: "http://ftp.heanet.ie/mirrors/www.apache.org/dist/zookeeper/stable/"
   prefix: /opt
   service_conf: /etc/init.d/zookeeper
@@ -11,7 +11,7 @@ zookeeper:
     log_dir: /var/log/zookeeper
     log_level: INFO
     data_dir: /var/lib/zookeeper
-    client_port: 2181
+    client_port: '2181'
     snap_count: None
     snap_retain_count: 3
     purge_interval: None
