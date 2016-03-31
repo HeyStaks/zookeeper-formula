@@ -1,1 +1,0 @@
-{{ grains.get('zookeeper_myid', '0') }}

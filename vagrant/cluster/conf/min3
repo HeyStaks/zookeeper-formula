@@ -1,4 +1,5 @@
 grains:
   roles:
     - zookeeper
-  zookeeper_myid: 3
+  zookeeper:
+    myid: 3

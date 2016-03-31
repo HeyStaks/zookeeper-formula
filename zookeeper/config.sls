@@ -10,10 +10,9 @@ zookeeper_datadir:
 zookeeper_myid:
   file.managed:
     - name: {{ zookeeper.config.data_dir }}/myid
-    - source: salt://zookeeper/templates/myid
     - user: {{ zookeeper.user }}
     - group: {{ zookeeper.group }}
-    - template: jinja
+    - contents: {{ grains.get('zookeeper:myid', '0') }}
     - require:
       - file: zookeeper_datadir
 
