@@ -23,7 +23,7 @@ Available states
 ``zookeeper``
 -------------
 
-Downloads the zookeeper tarball from zookeeper:source_url (either pillar or grain), installs the package.
+Downloads the zookeeper tarball from zookeeper:source_url  and installs the package.
 
 Zookeeper role and Salt Minion Configuration
 ============================================
