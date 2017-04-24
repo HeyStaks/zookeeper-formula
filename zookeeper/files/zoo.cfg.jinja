@@ -1,0 +1,9 @@
+{%- for var, value in config.iteritems() %}
+  {%- if var == 'servers' %}
+    {%- for server, server_config in value.iteritems() %}
+{{ server }}={{ server_config }}
+    {%- endfor %}
+  {%- else %}
+{{ var }}={{ value }}
+  {%- endif %}
+{%- endfor %}

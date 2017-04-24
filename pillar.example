@@ -1,18 +1,20 @@
 zookeeper:
+  version: 'zookeeper-3.4.10'
+  source: 'http://ftp.heanet.ie/mirrors/www.apache.org/dist/zookeeper/stable/zookeeper-3.4.10.tar.gz'
+  source_hash: 'sha1=eb2145498c5f7a0d23650d3e0102318363206fba'
   user: zookeeper
   group: zookeeper
-  uid: '60030'
-  version: '3.4.8'
-  default_url: "http://ftp.heanet.ie/mirrors/www.apache.org/dist/zookeeper/stable/"
-  prefix: /opt
-  service_conf: /etc/init.d/zookeeper
-  service_script: "zookeeper.init-ubuntu"
+  install_dir: /opt
+  myid: 1
+  #env:
+  #  ZOO_LOG_DIR: /var/log/zookeeper
+  #  ZOO_LOG4J_PROP: INFO,ROLLINGFILE
   config:
-    log_dir: /var/log/zookeeper
-    log_level: INFO
-    data_dir: /var/lib/zookeeper
-    client_port: '2181'
-    snap_count: None
-    snap_retain_count: 3
-    purge_interval: None
-    max_client_cnxns: 100
+    tickTime: 2000
+    initLimit: 10
+    syncLimit: 5
+    dataDir: /var/lib/zookeeper
+    clientPort: 2181
+    maxClientCnxns: 100
+    servers:
+      'server.1': '10.1.0.1:3887:3998'
