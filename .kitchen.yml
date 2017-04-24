@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+
+platforms:
+  - name: ubuntu-16.04
+
+verifier:
+  name: inspec
+
+provisioner:
+  name: salt_solo
+  formula: zookeeper
+  require_chef: false
+  dependencies:
+    - name: java
+      path: deps/java-formula
+
+suites:
+  - name: default
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - java
+            - zookeeper
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - zookeeper
+      pillars-from-files:
+        zookeeper.sls: pillar.example
